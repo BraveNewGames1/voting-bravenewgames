@@ -50,8 +50,8 @@ function CustomApp({ Component, pageProps }: AppPropsWithLayout) {
         <WalletProvider>
           {/* <div className={`${firaCode.variable} font-body`}> */}
         <NearProvider>  {getLayout(<Component {...pageProps} />)}</NearProvider>
-          <SettingsButton />
-          <SettingsDrawer />
+          {/* <SettingsButton />
+          <SettingsDrawer /> */}
           <ModalsContainer />
           <DrawersContainer />
           {/* </div> */}
