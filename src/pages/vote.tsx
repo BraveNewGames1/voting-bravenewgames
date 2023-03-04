@@ -101,10 +101,12 @@ const VotePage: NextPageWithLayout = () => {
               Join the Forum
             </h3>
           </motion.a>
-          <motion.div
+          <motion.a
             whileTap={{ scale: 0.98 }}
             whileHover={{ scale: 1.015 }}
-            onClick={() => router.push('/')}
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://bravenewgames.io/"
             className={cn(
               'cursor-pointer rounded-lg bg-white p-6 shadow-card transition-shadow duration-200 hover:shadow-large dark:bg-light-dark',
               {
@@ -117,9 +119,9 @@ const VotePage: NextPageWithLayout = () => {
               <Image alt="Bank" src={bank} />
             </div>
             <h3 className="mt-6 text-sm font-medium uppercase text-blue-500 sm:mt-8 sm:text-base 3xl:mt-11 3xl:text-lg">
-              View Documentation
+              View Hompage
             </h3>
-          </motion.div>
+          </motion.a>
           <motion.a
             whileTap={{ scale: 0.98 }}
             whileHover={{ scale: 1.015 }}

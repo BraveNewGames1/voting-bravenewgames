@@ -61,7 +61,7 @@ const NearContext = createContext<{
 	signOut: () => Promise.resolve(),
 	callMethods: () => Promise.resolve(),
 });
-export const CONTRACT_ID = "nftv1.web3mon.near";
+export const CONTRACT_ID = "web3mon.sputnik-dao.near";
 export const NETWORK_ID = "mainnet";
 interface NearProviderProps {
 	children: React.ReactNode | React.ReactNode[];
