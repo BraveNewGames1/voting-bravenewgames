@@ -7,7 +7,7 @@ import ModernScreen from '@/components/screens/modern-screen';
 import MinimalScreen from '@/components/screens/minimal-screen';
 import ClassicScreen from '@/components/screens/classic-screen';
 import RetroScreen from '@/components/screens/retro-screen';
-
+import VotePage from './vote';
 export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {},
@@ -35,7 +35,7 @@ const HomePage: NextPageWithLayout<
   }
 
   // render default screen/page which is modern
-  return <ModernScreen />;
+  return <VotePage />;
 };
 
 HomePage.getLayout = function getLayout(page) {
