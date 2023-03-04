@@ -18,8 +18,8 @@ export default function ModernScreen() {
   return (
     <>
       <NextSeo
-        title="Criptic"
-        description="Criptic - React Next Web3 NFT Crypto Dashboard Template"
+        title="Brave New Games | New Future of Gaming"
+        description="Brave New Games | New Future of Gaming"
       />
       <div className="flex flex-wrap">
         <div className="mb-8 w-full sm:mb-0 sm:w-1/2 sm:ltr:pr-6 sm:rtl:pl-6 md:w-[calc(100%-256px)] lg:w-[calc(100%-288px)] 2xl:w-[calc(100%-320px)] 3xl:w-[calc(100%-358px)]">

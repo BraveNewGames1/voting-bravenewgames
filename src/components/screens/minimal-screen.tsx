@@ -33,8 +33,8 @@ export default function MinimalScreen() {
   return (
     <>
       <NextSeo
-        title="Criptic Minimal"
-        description="Criptic - React Next Web3 NFT Crypto Dashboard Template"
+        title="Brave New Games | New Future of Gaming"
+        description="Brave New Games | New Future of Gaming"
       />
       <div className="">
         <PriceFeedSlider
