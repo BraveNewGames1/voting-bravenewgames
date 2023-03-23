@@ -31,7 +31,20 @@ const ProposalsPage: NextPageWithLayout = () => {
     {
       title: (
         <>
-          Info{' '}
+          Active{' '}
+          {totalActiveVote > 0 && (
+            <span className="ltr:ml-0.5 rtl:mr-0.5 ltr:md:ml-1.5 rtl:md:mr-1.5 ltr:lg:ml-2 rtl:lg:mr-2">
+              {totalActiveVote}
+            </span>
+          )}
+        </>
+      ),
+      path: 'active',
+    },
+    {
+      title: (
+        <>
+          Off-Chain{' '}
           {totalOffChainVote > 0 && (
             <span className="ltr:ml-0.5 rtl:mr-0.5 ltr:md:ml-1.5 rtl:md:mr-1.5 ltr:lg:ml-2 rtl:lg:mr-2">
               {totalOffChainVote}
@@ -44,30 +57,16 @@ const ProposalsPage: NextPageWithLayout = () => {
     {
       title: (
         <>
-          Active{' '}
-          {totalActiveVote > 0 && (
+          Executable{' '}
+          {totalExecutableVote > 0 && (
             <span className="ltr:ml-0.5 rtl:mr-0.5 ltr:md:ml-1.5 rtl:md:mr-1.5 ltr:lg:ml-2 rtl:lg:mr-2">
-              {totalActiveVote}
+              {totalExecutableVote}
             </span>
           )}
         </>
       ),
-      path: 'active',
+      path: 'executable',
     },
-
-    // {
-    //   title: (
-    //     <>
-    //       Executable{' '}
-    //       {totalExecutableVote > 0 && (
-    //         <span className="ltr:ml-0.5 rtl:mr-0.5 ltr:md:ml-1.5 rtl:md:mr-1.5 ltr:lg:ml-2 rtl:lg:mr-2">
-    //           {totalExecutableVote}
-    //         </span>
-    //       )}
-    //     </>
-    //   ),
-    //   path: 'executable',
-    // },
     {
       title: (
         <>
