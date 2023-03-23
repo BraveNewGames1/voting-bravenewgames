@@ -63,10 +63,10 @@ export const menuItems = [
         name: 'Vote with pools',
         href: routes.proposals,
       },
-      {
-        name: 'Create proposal',
-        href: routes.createProposal,
-      },
+      // {
+      //   name: 'Create proposal',
+      //   href: routes.createProposal,
+      // },
     ],
   },
 ];
