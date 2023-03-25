@@ -16,6 +16,7 @@ import 'swiper/css';
 import '@/assets/css/scrollbar.css';
 import '@/assets/css/globals.css';
 import '@/assets/css/range-slider.css';
+import '@/assets/css/custom.css';
 import { NearProvider } from '@/components/nft/NearContext';
 
 type AppPropsWithLayout = AppProps & {
@@ -42,14 +43,10 @@ function CustomApp({ Component, pageProps }: AppPropsWithLayout) {
         />
         <title>Brave New Games | New Future of Gaming</title>
       </Head>
-      <ThemeProvider
-        attribute="class"
-        enableSystem={false}
-        defaultTheme="dark"
-      >
+      <ThemeProvider attribute="class" enableSystem={false} defaultTheme="dark">
         <WalletProvider>
           {/* <div className={`${firaCode.variable} font-body`}> */}
-        <NearProvider>  {getLayout(<Component {...pageProps} />)}</NearProvider>
+          <NearProvider>{getLayout(<Component {...pageProps} />)}</NearProvider>
           {/* <SettingsButton />
           <SettingsDrawer /> */}
           <ModalsContainer />

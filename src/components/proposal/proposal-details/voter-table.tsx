@@ -5,26 +5,15 @@ import cn from 'classnames';
 import Button from '@/components/ui/button';
 import { LongArrowRight } from '@/components/icons/long-arrow-right';
 import { LongArrowLeft } from '@/components/icons/long-arrow-left';
-import { ExportIcon } from '@/components/icons/export-icon';
 
 const COLUMNS = [
   {
     Header: 'Voter',
-    accessor: 'voter',
+    accessor: 'voterId',
     // @ts-ignore
     Cell: ({ cell: { value } }) => (
-      <a
-        href={value.link}
-        className="inline-flex items-center gap-2 hover:underline hover:opacity-90 focus:underline focus:opacity-90"
-      >
-        {value.id}
-        <ExportIcon className="h-auto w-3" />
-      </a>
+      <p className="inline-flex items-center gap-2">{value}</p>
     ),
-  },
-  {
-    Header: 'Voting weight',
-    accessor: 'voting_weight',
   },
   {
     Header: 'Decision',
@@ -34,7 +23,7 @@ const COLUMNS = [
       <div
         className={cn(
           'text-[13px] uppercase sm:text-inherit ltr:sm:text-right rtl:sm:text-left',
-          value.toLowerCase() === 'accepted'
+          value.toLowerCase() === 'approve'
             ? 'text-green-600 dark:text-green-600'
             : 'text-red-600 dark:text-red-600'
         )}
@@ -47,12 +36,8 @@ const COLUMNS = [
 
 interface VoterTableTypes {
   votes: {
-    voter: {
-      id: string;
-      link: string;
-    };
-    voting_weight: number;
-    status: string[];
+    voterId: string;
+    status: unknown;
   }[];
 }
 
@@ -153,7 +138,10 @@ export default function VoterTable({ votes }: VoterTableTypes) {
             disabled={!canPreviousPage}
             onClick={() => previousPage()}
           >
-            <LongArrowLeft className="h-auto w-4 rtl:rotate-180" />
+            <LongArrowLeft
+              color="white"
+              className="h-auto w-4 rtl:rotate-180"
+            />
           </Button>
           <div className="uppercase dark:text-gray-100">
             Page {pageIndex + 1}{' '}
@@ -168,7 +156,10 @@ export default function VoterTable({ votes }: VoterTableTypes) {
             disabled={!canNextPage}
             onClick={() => nextPage()}
           >
-            <LongArrowRight className="h-auto w-4 rtl:rotate-180" />
+            <LongArrowRight
+              color="white"
+              className="h-auto w-4 rtl:rotate-180"
+            />
           </Button>
         </div>
       </div>

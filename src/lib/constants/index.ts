@@ -4,3 +4,11 @@ export enum LAYOUT_OPTIONS {
   RETRO = 'Retro',
   CLASSIC = 'Classic',
 }
+
+export enum PROPOSAL_TYPE {
+  ACTIVE = 'Active',
+  PAST = 'Expired',
+}
+
+export const MAINNET_TRANSACTION_URL =
+  'https://explorer.mainnet.near.org/transactions/';

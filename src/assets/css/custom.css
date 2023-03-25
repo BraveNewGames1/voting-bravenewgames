@@ -1,0 +1,7 @@
+.info-card:hover {
+  border: 0.1rem lightblue solid;
+}
+
+.info-card-selected {
+  border: 0.1rem lightblue solid;
+}
