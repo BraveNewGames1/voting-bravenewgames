@@ -1,5 +1,5 @@
-import { WalletSelector } from '@near-wallet-selector/core';
 import axios from 'axios';
+import { Contract } from 'near-api-js';
 
 export const DEFAULT_GAS = '40000000000000'; // 40 Tgas
 
@@ -84,12 +84,16 @@ export const fetchProposalsStats = async (): Promise<Stats[]> => {
 
 //TODO
 export const postVoteForProposal = async (
-  walletSelector: WalletSelector,
   contractId: string,
-  methodName: string,
-  choice: string,
-  proposalId: string
+  proposalId: string,
+  choice: string
 ) => {
+  //   const astroDAOContract = new Contract(
+  //     wallet,
+  //     contractId, // Contract ID
+  //     { viewMethods: [], changeMethods: ['act_proposal'] } // Contract methods
+  //   );
+  //   await astroDAOContract.call({ proposal_id: proposalId, action: choice });
   try {
   } catch (error) {
     console.error(error);

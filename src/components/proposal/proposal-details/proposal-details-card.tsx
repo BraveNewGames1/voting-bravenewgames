@@ -19,7 +19,13 @@ import moment from 'moment';
 import { getCurrentUserVote, postVoteForProposal } from '@/lib/hooks/use-dao';
 import { useNearContext } from '@/components/nft/NearContext';
 
-function VoteActionButton({ proposalId }: { proposalId: string }) {
+function VoteActionButton({
+  proposalId,
+  contractId,
+}: {
+  proposalId: string;
+  contractId: string;
+}) {
   return (
     <div className="mt-4 flex items-center gap-3 xs:mt-6 xs:inline-flex md:mt-10">
       <Button
@@ -27,13 +33,17 @@ function VoteActionButton({ proposalId }: { proposalId: string }) {
         color="success"
         className="flex-1 xs:flex-auto"
         //TODO
-        // onClick={() => postVoteForProposal('Approved', proposalId)}
+        onClick={() =>
+          postVoteForProposal(contractId, proposalId, 'VoteApprove')
+        }
       >
         Accept
       </Button>
       <Button
         //TODO
-        // onClick={() => postVoteForProposal('Rejected', proposalId)}
+        onClick={() =>
+          postVoteForProposal(contractId, proposalId, 'VoteReject')
+        }
         shape="rounded"
         color="danger"
         className="flex-1 xs:flex-auto"
@@ -53,17 +63,16 @@ export default function ProposalDetailsCard({
 }) {
   const [isExpand, setIsExpand] = useState(false);
   const { layout } = useLayout();
-  const [userVote, setUserVote] = useState(false);
+  const [userVote, setUserVote] = useState<String | undefined>(undefined);
   const { accountId } = useNearContext();
 
-  //TODO
-  // useEffect(() => {
-  //   if (accountId) {
-  //     getCurrentUserVote(accountId).then((res) => {
-  //       console.log('vote status', res.data);
-  //     });
-  //   }
-  // }, []);
+  useEffect(() => {
+    // CHECK if user has already voted
+    if (accountId && status === PROPOSAL_TYPE.ACTIVE) {
+      const vote = Object.keys(proposal.votes).find((i) => i === accountId);
+      setUserVote(vote ? proposal.votes[vote] : undefined);
+    }
+  }, []);
 
   function getVoteCounts(type: string) {
     let voteCount = 0;
@@ -122,7 +131,10 @@ export default function ProposalDetailsCard({
                   Vote Now
                 </Button>
               ) : (
-                <VoteActionButton proposalId={proposal.proposalId} />
+                <VoteActionButton
+                  contractId={proposal.id}
+                  proposalId={proposal.proposalId}
+                />
               )}
             </>
           )}
@@ -218,7 +230,7 @@ export default function ProposalDetailsCard({
             <VotePoll
               title={'Votes'}
               accepted={getVoteCounts('Approve')}
-              rejected={getVoteCounts('Rejected')}
+              rejected={getVoteCounts('Reject')}
               totalVotes={Object.values(proposal.votes).length}
             />
             <VoterTable votes={voterListArray} />
