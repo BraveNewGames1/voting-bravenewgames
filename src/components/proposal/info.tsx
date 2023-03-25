@@ -57,7 +57,7 @@ export default function Info() {
   useEffect(() => {
     fetchDAOState().then((resp) => {
       setDaoData(resp);
-      setSelected({ title: BlockTitle.DAO_FUNDS });
+      setSelected(BlockTitle.DAO_FUNDS);
     });
     fetchFundsStats().then((resp) => {
       setFunds(resp);
@@ -171,6 +171,7 @@ export default function Info() {
           </p>
           <div className="mb-4 grid gap-10 sm:grid-cols-1 md:grid-cols-2">
             <div className="rounded-lg bg-white p-3 shadow-card dark:bg-light-dark">
+              <h5 className="mb-1 dark:text-gray-100">{selectedData}</h5>
               <ResponsiveContainer width={'100%'} height={480}>
                 <AreaChart
                   data={getChartData()}
@@ -185,7 +186,6 @@ export default function Info() {
                   <XAxis dataKey="timestamp" type="category" />
                   <YAxis dataKey="value" type="number" />
                   <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-
                   <Area
                     type="monotone"
                     dataKey="value"
