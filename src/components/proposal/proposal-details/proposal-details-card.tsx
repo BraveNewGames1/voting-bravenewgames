@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import cn from 'classnames';
 import Button from '@/components/ui/button';
@@ -16,33 +16,50 @@ import {
   PROPOSAL_TYPE,
 } from '@/lib/constants';
 import moment from 'moment';
-import { getCurrentUserVote, postVoteForProposal } from '@/lib/hooks/use-dao';
+import { postVoteForProposal } from '@/lib/hooks/use-dao';
 import { useNearContext } from '@/components/nft/NearContext';
+import { WalletSelector } from '@near-wallet-selector/core';
+
+interface VoteActionProps {
+  proposalId: string;
+  contractId: string;
+  walletSelector: WalletSelector | null;
+  accountId: string | null;
+}
 
 function VoteActionButton({
   proposalId,
   contractId,
-}: {
-  proposalId: string;
-  contractId: string;
-}) {
+  walletSelector,
+  accountId,
+}: VoteActionProps) {
   return (
     <div className="mt-4 flex items-center gap-3 xs:mt-6 xs:inline-flex md:mt-10">
       <Button
         shape="rounded"
         color="success"
         className="flex-1 xs:flex-auto"
-        //TODO
         onClick={() =>
-          postVoteForProposal(contractId, proposalId, 'VoteApprove')
+          postVoteForProposal(
+            walletSelector,
+            contractId,
+            proposalId,
+            'VoteApprove',
+            accountId
+          )
         }
       >
         Accept
       </Button>
       <Button
-        //TODO
         onClick={() =>
-          postVoteForProposal(contractId, proposalId, 'VoteReject')
+          postVoteForProposal(
+            walletSelector,
+            contractId,
+            proposalId,
+            'VoteReject',
+            accountId
+          )
         }
         shape="rounded"
         color="danger"
@@ -64,7 +81,7 @@ export default function ProposalDetailsCard({
   const [isExpand, setIsExpand] = useState(false);
   const { layout } = useLayout();
   const [userVote, setUserVote] = useState<String | undefined>(undefined);
-  const { accountId } = useNearContext();
+  const { accountId, selector } = useNearContext();
 
   useEffect(() => {
     // CHECK if user has already voted
@@ -132,8 +149,10 @@ export default function ProposalDetailsCard({
                 </Button>
               ) : (
                 <VoteActionButton
-                  contractId={proposal.id}
+                  walletSelector={selector}
+                  contractId={proposal.daoId}
                   proposalId={proposal.proposalId}
+                  accountId={accountId}
                 />
               )}
             </>
@@ -142,7 +161,7 @@ export default function ProposalDetailsCard({
           {userVote && <p className="mt-4">Your Vote: {userVote}</p>}
 
           {/* show only for past vote */}
-          {status === PROPOSAL_TYPE.PAST && (
+          {status !== PROPOSAL_TYPE.ACTIVE && (
             <>
               <time className="mt-4 block text-gray-400 xs:mt-6 md:mt-7">
                 <span className="font-medium">Status: </span> {proposal.status}
@@ -174,7 +193,7 @@ export default function ProposalDetailsCard({
         )}
 
         {/* switch toggle indicator for past vote */}
-        {status === PROPOSAL_TYPE.PAST && (
+        {status !== PROPOSAL_TYPE.ACTIVE && (
           <div className="mb-4 flex items-center gap-3 md:mb-0 md:items-start md:justify-end">
             <Switch
               checked={isExpand}

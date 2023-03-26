@@ -7,7 +7,8 @@ export enum LAYOUT_OPTIONS {
 
 export enum PROPOSAL_TYPE {
   ACTIVE = 'Active',
-  PAST = 'Expired',
+  APPROVED = 'Approved',
+  FAILED = 'Failed',
 }
 
 export const MAINNET_TRANSACTION_URL =

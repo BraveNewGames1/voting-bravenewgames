@@ -3,7 +3,8 @@ import ProposalDetailsCard from '@/components/proposal/proposal-details/proposal
 import { ExportIcon } from '@/components/icons/export-icon';
 import {
   fetchActiveProposals,
-  fetchPastProposals,
+  fetchApprovedProposals,
+  fetchFailedProposals,
   PAGE_LIMIT,
 } from '@/lib/hooks/use-dao';
 import { useEffect, useState } from 'react';
@@ -21,14 +22,20 @@ export default function ProposalList({ voteStatus }: { voteStatus: string }) {
 
   useEffect(() => {
     const offset = PAGE_LIMIT * currentPageIndex;
-    if (voteStatus === PROPOSAL_TYPE.ACTIVE) {
-      fetchActiveProposals(offset).then((resp) => {
+    if (voteStatus === PROPOSAL_TYPE.APPROVED) {
+      fetchApprovedProposals(offset).then((resp) => {
         setProposals(resp?.data);
         setTotalCount(resp.total);
         setLoading(false);
       });
-    } else if (voteStatus === PROPOSAL_TYPE.PAST) {
-      fetchPastProposals(offset).then((resp) => {
+    } else if (voteStatus === PROPOSAL_TYPE.FAILED) {
+      fetchFailedProposals(offset).then((resp) => {
+        setProposals(resp?.data);
+        setTotalCount(resp.total);
+        setLoading(false);
+      });
+    } else {
+      fetchActiveProposals(offset).then((resp) => {
         setProposals(resp?.data);
         setTotalCount(resp.total);
         setLoading(false);

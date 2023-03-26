@@ -1,5 +1,5 @@
+import { WalletSelector } from '@near-wallet-selector/core';
 import axios from 'axios';
-import { Contract } from 'near-api-js';
 
 export const DEFAULT_GAS = '40000000000000'; // 40 Tgas
 
@@ -39,10 +39,19 @@ export const fetchActiveProposals = async (dataLength: number) => {
   return resp;
 };
 
-export const fetchPastProposals = async (dataLength: number) => {
+export const fetchApprovedProposals = async (dataLength: number) => {
   const resp = (
     await axios.get(
       `${BaseURL}/proposals?dao=${DAO}&status=Approved&limit=${PAGE_LIMIT}&offset=${dataLength}&orderBy=createdAt&order=DESC`
+    )
+  ).data;
+  return resp;
+};
+
+export const fetchFailedProposals = async (dataLength: number) => {
+  const resp = (
+    await axios.get(
+      `${BaseURL}/proposals?dao=${DAO}&failed=true&limit=${PAGE_LIMIT}&offset=${dataLength}&orderBy=createdAt&order=DESC`
     )
   ).data;
   return resp;
@@ -82,19 +91,38 @@ export const fetchProposalsStats = async (): Promise<Stats[]> => {
   return resp;
 };
 
-//TODO
 export const postVoteForProposal = async (
+  selector: WalletSelector | null,
   contractId: string,
   proposalId: string,
-  choice: string
+  choice: string,
+  accountId: string | null
 ) => {
-  //   const astroDAOContract = new Contract(
-  //     wallet,
-  //     contractId, // Contract ID
-  //     { viewMethods: [], changeMethods: ['act_proposal'] } // Contract methods
-  //   );
-  //   await astroDAOContract.call({ proposal_id: proposalId, action: choice });
   try {
+    if (!selector) {
+      throw 'Please Select a wallet';
+    }
+    const wallet = await selector.wallet();
+    const resp = await wallet.signAndSendTransactions({
+      transactions: [
+        {
+          receiverId: contractId,
+          signerId: accountId as string,
+          actions: [
+            {
+              type: 'FunctionCall',
+              params: {
+                methodName: 'act_proposal',
+                args: { id: proposalId, action: choice },
+                gas: DEFAULT_GAS,
+                deposit: '',
+              },
+            },
+          ],
+        },
+      ],
+    });
+    return resp;
   } catch (error) {
     console.error(error);
   }

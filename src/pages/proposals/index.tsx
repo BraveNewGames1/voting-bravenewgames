@@ -19,10 +19,6 @@ import Info from '@/components/proposal/info';
 const ProposalsPage: NextPageWithLayout = () => {
   const router = useRouter();
   const { layout } = useLayout();
-  const { totalVote: totalActiveVote } = getVotesByStatus('active');
-  const { totalVote: totalOffChainVote } = getVotesByStatus('off-chain');
-  const { totalVote: totalExecutableVote } = getVotesByStatus('executable');
-  const { totalVote: totalPastVote } = getVotesByStatus('past');
   function goToCreateProposalPage() {
     setTimeout(() => {
       router.push(routes.createProposal);
@@ -38,8 +34,12 @@ const ProposalsPage: NextPageWithLayout = () => {
       path: PROPOSAL_TYPE.ACTIVE,
     },
     {
-      title: 'Past',
-      path: PROPOSAL_TYPE.PAST,
+      title: 'Approved',
+      path: PROPOSAL_TYPE.APPROVED,
+    },
+    {
+      title: 'Failed',
+      path: PROPOSAL_TYPE.FAILED,
     },
   ];
   return (
@@ -92,7 +92,10 @@ const ProposalsPage: NextPageWithLayout = () => {
             <ProposalList voteStatus={PROPOSAL_TYPE.ACTIVE} />
           </TabPanel>
           <TabPanel className="focus:outline-none">
-            <ProposalList voteStatus={PROPOSAL_TYPE.PAST} />
+            <ProposalList voteStatus={PROPOSAL_TYPE.APPROVED} />
+          </TabPanel>
+          <TabPanel className="focus:outline-none">
+            <ProposalList voteStatus={PROPOSAL_TYPE.FAILED} />
           </TabPanel>
         </ParamTab>
       </section>
