@@ -255,10 +255,9 @@ export default function ProposalDetailsCard({
             <VoterTable votes={voterListArray} />
             <RevealContent defaultHeight={250}>
               <h4 className="mb-6 uppercase dark:text-gray-100">Description</h4>
-              <div
-                className="dynamic-html grid gap-2 leading-relaxed text-gray-600 dark:text-gray-400"
-                dangerouslySetInnerHTML={{ __html: proposal.description }}
-              />
+              <div className="dynamic-html grid gap-2 leading-relaxed text-gray-600 dark:text-gray-400">
+                {proposal.description?.split('$$$')[0]}
+              </div>
             </RevealContent>
           </motion.div>
         )}
