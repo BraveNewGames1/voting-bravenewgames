@@ -1,5 +1,6 @@
 import { WalletSelector } from '@near-wallet-selector/core';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export const DEFAULT_GAS = '40000000000000'; // 40 Tgas
 
@@ -99,8 +100,9 @@ export const postVoteForProposal = async (
   accountId: string | null
 ) => {
   try {
-    if (!selector) {
-      throw 'Please Select a wallet';
+    if (!selector || !selector.isSignedIn()) {
+      toast.warn('Please connect to your account using wallet.');
+      return;
     }
     const wallet = await selector.wallet();
     const resp = await wallet.signAndSendTransactions({
@@ -124,6 +126,8 @@ export const postVoteForProposal = async (
     });
     return resp;
   } catch (error) {
+    // @ts-ignore
+    toast.error(error);
     console.error(error);
   }
 };
