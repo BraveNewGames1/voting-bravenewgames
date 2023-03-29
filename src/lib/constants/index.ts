@@ -13,3 +13,6 @@ export enum PROPOSAL_TYPE {
 
 export const MAINNET_TRANSACTION_URL =
   'https://explorer.mainnet.near.org/transactions/';
+
+export const MAINNET_ACCOUNTS_URL =
+  'https://explorer.mainnet.near.org/accounts/';

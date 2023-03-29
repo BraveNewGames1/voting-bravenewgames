@@ -12,6 +12,7 @@ import { fadeInBottom } from '@/lib/framer-motion/fade-in-bottom';
 import { useLayout } from '@/lib/hooks/use-layout';
 import {
   LAYOUT_OPTIONS,
+  MAINNET_ACCOUNTS_URL,
   MAINNET_TRANSACTION_URL,
   PROPOSAL_TYPE,
 } from '@/lib/constants';
@@ -246,6 +247,44 @@ export default function ProposalDetailsCard({
                 {proposal.proposer} <ExportIcon className="h-auto w-3" />
               </a>
             </div>
+            {proposal.type === 'Transfer' && (
+              <div className="my-6 flex flex-1 flex-wrap justify-between border-y border-dashed border-gray-200 py-6 text-gray-500 dark:border-gray-700 dark:text-gray-400">
+                {proposal?.kind?.tokenId && (
+                  <div>
+                    Token ID:{' '}
+                    <a
+                      target="_blank"
+                      href={MAINNET_ACCOUNTS_URL + proposal.kind.tokenId}
+                      className="ml-1 inline-flex items-center gap-3 font-medium text-gray-900 hover:underline hover:opacity-90 focus:underline focus:opacity-90 dark:text-gray-100"
+                    >
+                      {proposal.kind.tokenId}{' '}
+                      <ExportIcon className="h-auto w-3" />
+                    </a>
+                  </div>
+                )}
+                {proposal?.kind?.receiverId && (
+                  <div>
+                    Receiver ID:{' '}
+                    <a
+                      target="_blank"
+                      href={MAINNET_ACCOUNTS_URL + proposal.kind.receiverId}
+                      className="ml-1 inline-flex items-center gap-3 font-medium text-gray-900 hover:underline hover:opacity-90 focus:underline focus:opacity-90 dark:text-gray-100"
+                    >
+                      {proposal.kind.receiverId}{' '}
+                      <ExportIcon className="h-auto w-3" />
+                    </a>
+                  </div>
+                )}
+                {proposal?.kind?.amount && (
+                  <div>
+                    Amount:{' '}
+                    <p className="ml-1 inline-flex items-center gap-3 font-medium text-gray-900 hover:underline hover:opacity-90 focus:underline focus:opacity-90 dark:text-gray-100">
+                      {+proposal.kind.amount / 10 ** 24} Near
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
             <VotePoll
               title={'Votes'}
               accepted={getVoteCounts('Approve')}
@@ -256,7 +295,7 @@ export default function ProposalDetailsCard({
             <RevealContent defaultHeight={250}>
               <h4 className="mb-6 uppercase dark:text-gray-100">Description</h4>
               <div className="dynamic-html grid gap-2 leading-relaxed text-gray-600 dark:text-gray-400">
-                {proposal.description?.split('$$$')[0]}
+                {proposal.description?.split('$$$$')[0]}
               </div>
             </RevealContent>
           </motion.div>
