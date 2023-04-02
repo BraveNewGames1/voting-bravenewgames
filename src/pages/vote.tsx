@@ -64,7 +64,7 @@ const VotePage: NextPageWithLayout = () => {
             whileHover={{ scale: 1.015 }}
             target="_blank"
             rel="noopener noreferrer"
-            href="https://discord.com/"
+            href="https://discord.gg/eSZeG9nS53"
             className={cn(
               'rounded-lg bg-white p-6 shadow-card transition-shadow duration-200 hover:shadow-large dark:bg-light-dark',
               {
@@ -85,7 +85,7 @@ const VotePage: NextPageWithLayout = () => {
             whileHover={{ scale: 1.015 }}
             target="_blank"
             rel="noopener noreferrer"
-            href="https://www.discourse.org/"
+            href="https://app.astrodao.com/dao/brave-new-games.sputnik-dao.near"
             className={cn(
               'rounded-lg bg-white p-6 shadow-card transition-shadow duration-200 hover:shadow-large dark:bg-light-dark',
               {
@@ -98,7 +98,7 @@ const VotePage: NextPageWithLayout = () => {
               <Image alt="Forum" src={forum} />
             </span>
             <h3 className="mt-6 text-sm font-medium uppercase text-orange-500 sm:mt-8 sm:text-base 3xl:mt-11 3xl:text-lg">
-              Join the Forum
+              Join the Astro DAO
             </h3>
           </motion.a>
           <motion.a
@@ -127,7 +127,7 @@ const VotePage: NextPageWithLayout = () => {
             whileHover={{ scale: 1.015 }}
             target="_blank"
             rel="noopener noreferrer"
-            href="https://forum.mirror.finance/"
+            href="https://litepaper.gitbook.io/bravenewgames"
             className={cn(
               'rounded-lg bg-white p-6 shadow-card transition-shadow duration-200 hover:shadow-large dark:bg-light-dark',
               {
@@ -140,7 +140,7 @@ const VotePage: NextPageWithLayout = () => {
               <Image alt="Mirror" src={mirror} />
             </span>
             <h3 className="mt-6 text-sm font-medium uppercase text-gray-400 sm:mt-8 sm:text-base 3xl:mt-11 3xl:text-lg">
-              Read on mirror
+              Operating Agreement
             </h3>
           </motion.a>
         </div>

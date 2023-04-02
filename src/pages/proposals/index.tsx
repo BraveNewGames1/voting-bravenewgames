@@ -66,21 +66,22 @@ const ProposalsPage: NextPageWithLayout = () => {
             </div>
             <div>
               <h2 className="mb-2 text-base font-medium uppercase dark:text-gray-100 xl:text-lg">
-                You have 100 votes
+                Brave New Games
               </h2>
               <p className="leading-relaxed text-gray-600 dark:text-gray-400">
-                You need CRIPTIC or CRIPTIC tokens to participate in governance.
+                You can check out all the information on Brave New Games
               </p>
             </div>
           </div>
           <div className="shrink-0">
-            <Button
-              shape="rounded"
-              fullWidth={true}
-              className="uppercase"
-              onClick={() => goToCreateProposalPage()}
-            >
-              Create Proposal
+            <Button shape="rounded" fullWidth={true} className="uppercase">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://app.astrodao.com/dao/brave-new-games.sputnik-dao.near/proposals"
+              >
+                Create Proposal
+              </a>
             </Button>
           </div>
         </header>
